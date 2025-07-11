@@ -1,27 +1,28 @@
-// server.js
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
 const app = express();
-
-// ✅ Use the port provided by Render (important)
 const PORT = process.env.PORT || 5000;
 
-// ✅ Middleware
-app.use(cors());
+// ✅ CORS config for Render
+const allowedOrigins = ['https://campaign-post-generator.onrender.com'];
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST'],
+}));
+
 app.use(express.json());
 
-// ✅ Routes
-app.use("/api", require("./routes/generate-cover")); // Serves /api/generate-cover
+// ✅ API route
+app.use("/api", require("./routes/generate-cover"));
 
-// ✅ Optional: Health check route (good for uptime monitoring)
+// ✅ Health check
 app.get("/", (req, res) => {
-  res.send("🚀 Backend is running!");
+  res.send("✅ Backend is live");
 });
 
-// ✅ Start the server
+// ✅ Start server
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
 });
