@@ -163,7 +163,7 @@ if (page18Content3) formData.append("page18Content3", page18Content3);
     setLoading(true);
     setPreviewUrl("");
 
-    const res = await fetch("http://localhost:5000/api/generate-cover?preview=true", {
+    const res = await fetch("https://campaign-post-server.onrender.com/api/generate-cover?preview=true", {
       method: "POST",
       body: formData,
     });
